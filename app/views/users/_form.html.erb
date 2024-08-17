@@ -1,0 +1,164 @@
+<div class="container text-light p-4 rounded">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= form_with model: @user, local: true, class: 'row g-3 bg-secondary p-4 rounded' do |form| %>
+
+        <div class="col-md-8">
+          <%= form.label :full_name, 'Nome Completo', class: 'form-label' %>
+          <%= form.text_field :full_name, class: 'form-control bg-dark text-light border-light', id: 'validationDefault01', required: true %>
+        </div>
+
+        <div class="col-md-4">
+          <%= form.label :gender, 'Gênero', class: 'form-label' %>
+          <%= form.select :gender, [['Masculino', 'Masculino'], ['Feminino', 'Feminino'], ['Outro', 'Outro']], { prompt: 'Escolha...' }, { class: 'form-select bg-dark text-light border-light', id: 'validationDefault04', required: true } %>
+        </div>
+
+        <div class="col-md-4 ml-3">
+          <%= form.label :birth_date, 'Data de Nascimento', class: 'form-label' %>
+          <%= form.date_field :birth_date, class: 'form-control dark-input', id: 'validationDefaultDate', required: true %>
+        </div>
+
+        <div class="col-md-3">
+          <%= form.label :cpf, 'CPF', class: 'form-label' %>
+          <%= form.text_field :cpf, class: 'form-control bg-dark text-light border-light', id: 'validationDefault03', required: true %>
+        </div>
+
+        <div class="col-md-3">
+          <%= form.label :rg, 'RG', class: 'form-label' %>
+          <%= form.text_field :rg, class: 'form-control bg-dark text-light border-light', id: 'validationDefault03', required: true %>
+        </div>
+
+        <div class="col-12 mb-0">
+          <label class="section-label fs-4">Endereço:</label>
+        </div>
+
+        <div class="col-md-3 adress-component">
+          <%= form.label :cep, 'CEP', class: 'form-label' %>
+          <%= form.number_field :cep, class: 'form-control bg-dark text-light border-light', id: 'cep', required: true %>
+        </div>
+
+        <div class="col-md-4 adress-component">
+          <%= form.label :country, 'Estado', class: 'form-label' %>
+          <%= form.select :country, 
+              options_for_select([
+                ['Acre (AC)', 'AC'], ['Alagoas (AL)', 'AL'], ['Amapá (AP)', 'AP'], ['Amazonas (AM)', 'AM'],
+                ['Bahia (BA)', 'BA'], ['Ceará (CE)', 'CE'], ['Distrito Federal (DF)', 'DF'], ['Espírito Santo (ES)', 'ES'],
+                ['Goiás (GO)', 'GO'], ['Maranhão (MA)', 'MA'], ['Mato Grosso (MT)', 'MT'], ['Mato Grosso do Sul (MS)', 'MS'],
+                ['Minas Gerais (MG)', 'MG'], ['Pará (PA)', 'PA'], ['Paraíba (PB)', 'PB'], ['Paraná (PR)', 'PR'],
+                ['Pernambuco (PE)', 'PE'], ['Piauí (PI)', 'PI'], ['Rio de Janeiro (RJ)', 'RJ'], ['Rio Grande do Norte (RN)', 'RN'],
+                ['Rio Grande do Sul (RS)', 'RS'], ['Rondônia (RO)', 'RO'], ['Roraima (RR)', 'RR'], ['Santa Catarina (SC)', 'SC'],
+                ['São Paulo (SP)', 'SP'], ['Sergipe (SE)', 'SE'], ['Tocantins (TO)', 'TO']
+              ], @user.country), 
+              { prompt: @user.country.present? ? @user.country : 'Escolha...' },
+              { class: 'form-select bg-dark text-light border-light', id: 'uf', required: true } %>
+        </div>
+
+        <div class="col-md-5 adress-component">
+          <%= form.label :city, 'Cidade', class: 'form-label' %>
+          <%= form.text_field :city, class: 'form-control bg-dark text-light border-light', id: 'cidade', required: true %>
+        </div>
+
+        <div class="col-md-6 adress-component">
+          <%= form.label :adress, 'Rua', class: 'form-label' %>
+          <%= form.text_field :adress, class: 'form-control bg-dark text-light border-light', id: 'logradouro', required: true %>
+        </div>
+
+        <div class="col-md-4 adress-component">
+          <%= form.label :district, 'Bairro', class: 'form-label' %>
+          <%= form.text_field :district, class: 'form-control bg-dark text-light border-light', id: 'bairro', required: true %>
+        </div>
+
+        <div class="col-md-2 adress-component">
+          <%= form.label :number, 'N°', class: 'form-label' %>
+          <%= form.number_field :number, class: 'form-control bg-dark text-light border-light', id: 'numero', required: true %>
+        </div>
+
+        <div class="col-md-4 adress-component">
+          <%= form.label :complement, 'Complemento', class: 'form-label' %>
+          <%= form.text_field :complement, class: 'form-control bg-dark text-light border-light', id: 'complemento' %>
+        </div>
+
+        <div class="col-12 mb-0">
+          <label class="section-label fs-4">Contato:</label>
+        </div>
+
+        <div class="col-md-4 mt-2">
+          <%= form.label :phone, 'Telefone', class: 'form-label' %>
+          <%= form.text_field :phone, class: 'form-control bg-dark text-light border-light', id: 'validationDefault03', required: true %>
+        </div>
+
+        <div class="col-md-5 mt-2">
+          <%= form.label :email, 'Email', class: 'form-label' %>
+          <%= form.text_field :email, class: 'form-control bg-dark text-light border-light', id: 'validationDefault03', required: true %>
+        </div>
+
+        <div class="col-12 mb-0">
+          <label class="section-label fs-4">Informações Relacionais:</label>
+        </div>
+
+        <div class="col-md-3">
+          <%= form.label :salary, 'Salário', class: 'form-label' %>
+          <%= form.text_field :salary, class: 'form-control bg-dark text-light border-light', id: 'validationDefault03', required: true %>
+        </div>
+
+        <div class="col-md-4 ml-3">
+          <%= form.label :hire_date, 'Data de Contratação', class: 'form-label' %>
+          <%= form.date_field :hire_date, class: 'form-control dark-input', id: 'validationDefaultDate', required: true %>
+        </div>
+
+        <div class="col-md-4">
+          <%= form.label :position, 'Cargo', class: 'form-label' %>
+          <%= form.select :position, [['Algo', 'Algo'], ['Algo 2', 'Algo 2'], ['Outro', 'Outro']], { prompt: 'Escolha...' }, { class: 'form-select bg-dark text-light border-light', id: 'validationDefault04', required: true } %>
+        </div>
+
+        <div class="col-md-4">
+          <%= form.label :status, 'Status', class: 'form-label' %>
+          <%= form.select :status, 
+              [['Ativo', 'active'], ['Inativo', 'inactive'], ['Em licença', 'on_leave']], 
+              { prompt: @user.status.present? ? @user.status.capitalize : 'Escolha...' },
+              { class: 'form-select bg-dark text-light border-light', id: 'validationDefault04', required: true } %>
+        </div>
+
+        <div class="col-md-4 mt-4">
+            <%= form.label :Foto %>
+            <%= form.file_field :photo, class: 'form-control' %>
+        </div>              
+
+        <div class="col-12 text-center">
+          <%= form.submit 'Enviar', class: 'btn btn-primary' %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  document.getElementById('cep').addEventListener('blur', function() {
+    var cep = this.value.replace(/\D/g, '');
+
+    if (cep.length == 8) {
+      var url = `https://viacep.com.br/ws/${cep}/json/`;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          if (!data.erro) {
+            document.getElementById('logradouro').value = data.logradouro;
+            document.getElementById('bairro').value = data.bairro;
+            document.getElementById('cidade').value = data.localidade;
+            document.getElementById('uf').value = data.uf;
+          } else {
+            alert("CEP não encontrado.");
+          }
+        })
+        .catch(error => {
+          console.error("Erro ao buscar o CEP: ", error);
+          alert("Erro ao buscar o CEP.");
+        });
+    } else {
+      alert("CEP inválido.");
+    }
+  });
+</script>

@@ -1,0 +1,59 @@
+<div class="container mt-5">
+  <div class="row">
+    <!-- Coluna para o conteúdo -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body position-relative">
+
+          <div class="position-absolute top-0 end-0 p-2">
+            <%= button_to @position, method: :delete, form: {data: { turbo_confirm: "Você tem certeza?" }}, style: "background: none; border: none; padding: 0; box-shadow: none;" do %>
+              <%= image_tag "lixeira.png", alt: "Apagar", style: "width: auto; height: auto;" %>
+            <% end %>
+          </div>
+
+          <h4 class="card-title">Nome: <strong><%= @position.name %></strong></h4>
+
+          <p class="card-text"><strong>Descrição:</strong> <%= @position.description %></p>
+          <p class="card-text"><strong>Departamento:</strong> <%= @position.department %></p>
+          <p class="card-text"><strong>Nível:</strong> <%= @position.level %></p>
+
+          <p class="card-text"><strong>Status:</strong>
+            <% if @position.status == 'active' %>
+              <%= "Ativo" %>
+            <% elsif @position.status == 'inactive' %>
+              <%= "Inativo" %>
+            <% else %>
+              <%= "Em Licença" %>
+            <% end %>
+          </p>
+
+          <p class="card-text"><strong>Salário Base:</strong> <%= number_to_currency(@position.base_salary, unit: "R$", separator: ",", delimiter: ".", precision: 2) %></p>
+
+        <div class="row">
+            <div class="col-md-3">
+                <p class="card-text mb-1"><strong>Requisitos:</strong></p>
+                <ul class="mt-0">
+                <% @position.requirements.split(/;|\n/).each do |requirement| %>
+                    <li><%= requirement.strip %></li>
+                <% end %>
+                </ul>
+            </div>
+
+            <div class="col-md-6">
+                <p class="card-text mb-1"><strong>Benefícios:</strong></p>
+                <ul class="mt-0">
+                <% @position.benefits.split(/;|\n/).each do |benefit| %>
+                    <li><%= benefit.strip %></li>
+                <% end %>
+                </ul>
+            </div>
+        </div>
+
+
+        <%= link_to 'Voltar', positions_path, class: 'btn btn-warning mt-3' %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

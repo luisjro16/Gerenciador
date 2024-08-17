@@ -1,0 +1,111 @@
+<div class="container text-light p-4 rounded">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <%= form_with model: @department, local: true, class: 'row g-3 bg-secondary p-4 rounded' do |form| %>
+
+        <div class="col-md-12">
+          <%= form.label :name, 'Nome', class: 'form-label' %>
+          <%= form.text_field :name, class: 'form-control bg-dark text-light border-light', id: 'validationDefaultName', required: true %>
+        </div>
+
+        <div class="col-md-12">
+          <%= form.label :description, 'Descrição', class: 'form-label' %>
+          <%= form.text_area :description, class: 'form-control bg-dark text-light border-light', id: 'validationDefaultDescription', rows: 3, required: true %>
+        </div>
+
+        <div class="col-md-12">
+          <%= form.label :code, 'Código', class: 'form-label' %>
+          <%= form.text_field :code, class: 'form-control bg-dark text-light border-light', id: 'validationDefaultCode', required: true %>
+        </div>
+
+        <div class="col-md-3">
+          <%= form.label :cep, 'CEP', class: 'form-label' %>
+          <%= form.number_field :cep, class: 'form-control bg-dark text-light border-light', id: 'cep', required: true %>
+        </div>
+
+        <div class="col-md-4">
+          <%= form.label :street, 'Rua', class: 'form-label' %>
+          <%= form.text_field :street, class: 'form-control bg-dark text-light border-light', id: 'logradouro', required: true %>
+        </div>
+
+        <div class="col-md-2">
+          <%= form.label :number, 'Número', class: 'form-label' %>
+          <%= form.number_field :number, class: 'form-control bg-dark text-light border-light', id: 'numero', required: true %>
+        </div>
+
+        <div class="col-md-3">
+          <%= form.label :complement, 'Complemento', class: 'form-label' %>
+          <%= form.text_field :complement, class: 'form-control bg-dark text-light border-light', id: 'complemento' %>
+        </div>
+
+        <div class="col-md-4">
+          <%= form.label :district, 'Bairro', class: 'form-label' %>
+          <%= form.text_field :district, class: 'form-control bg-dark text-light border-light', id: 'bairro', required: true %>
+        </div>
+
+        <div class="col-md-4">
+          <%= form.label :city, 'Cidade', class: 'form-label' %>
+          <%= form.text_field :city, class: 'form-control bg-dark text-light border-light', id: 'cidade', required: true %>
+        </div>
+
+        <div class="col-md-4">
+          <%= form.label :state, 'Estado', class: 'form-label' %>
+          <%= form.select :state, 
+              options_for_select([
+                ['Acre (AC)', 'AC'], ['Alagoas (AL)', 'AL'], ['Amapá (AP)', 'AP'], ['Amazonas (AM)', 'AM'],
+                ['Bahia (BA)', 'BA'], ['Ceará (CE)', 'CE'], ['Distrito Federal (DF)', 'DF'], ['Espírito Santo (ES)', 'ES'],
+                ['Goiás (GO)', 'GO'], ['Maranhão (MA)', 'MA'], ['Mato Grosso (MT)', 'MT'], ['Mato Grosso do Sul (MS)', 'MS'],
+                ['Minas Gerais (MG)', 'MG'], ['Pará (PA)', 'PA'], ['Paraíba (PB)', 'PB'], ['Paraná (PR)', 'PR'],
+                ['Pernambuco (PE)', 'PE'], ['Piauí (PI)', 'PI'], ['Rio de Janeiro (RJ)', 'RJ'], ['Rio Grande do Norte (RN)', 'RN'],
+                ['Rio Grande do Sul (RS)', 'RS'], ['Rondônia (RO)', 'RO'], ['Roraima (RR)', 'RR'], ['Santa Catarina (SC)', 'SC'],
+                ['São Paulo (SP)', 'SP'], ['Sergipe (SE)', 'SE'], ['Tocantins (TO)', 'TO']
+              ], @department.state), 
+              { prompt: @department.state.present? ? @department.state : 'Escolha...' },
+              { class: 'form-select bg-dark text-light border-light', id: 'uf', required: true } %>
+        </div>
+
+        <div class="col-md-4">
+          <%= form.label :status, 'Status', class: 'form-label' %>
+          <%= form.select :status, 
+              [['Ativo', 'active'], ['Inativo', 'inactive']], 
+              { prompt: @department.status.present? ? @department.status.capitalize : 'Escolha...' },
+              { class: 'form-select bg-dark text-light border-light', id: 'validationDefaultStatus', required: true } %>
+        </div>
+
+        <div class="col-12 text-center mt-3">
+          <%= form.submit 'Salvar', class: 'btn btn-primary' %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('cep').addEventListener('blur', function() {
+    var cep = this.value.replace(/\D/g, '');
+
+    if (cep.length == 8) {
+      var url = `https://viacep.com.br/ws/${cep}/json/`;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          if (!data.erro) {
+            document.getElementById('logradouro').value = data.logradouro;
+            document.getElementById('bairro').value = data.bairro;
+            document.getElementById('cidade').value = data.localidade;
+            document.getElementById('uf').value = data.uf;
+          } else {
+            alert("CEP não encontrado.");
+          }
+        })
+        .catch(error => {
+          console.error("Erro ao buscar o CEP: ", error);
+          alert("Erro ao buscar o CEP.");
+        });
+    } else {
+      alert("CEP inválido.");
+    }
+  });
+</script>

@@ -1,0 +1,35 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <!-- Coluna para o conteúdo -->
+    <div class="col-md-8"> <!-- Ajuste o número aqui para definir a largura -->
+      <div class="card">
+        <div class="card-body department-relative">
+
+          <div class="position-absolute top-0 end-0 p-2">
+            <%= button_to @department, method: :delete, form: {data: { turbo_confirm: "Você tem certeza?" }}, style: "background: none; border: none; padding: 0; box-shadow: none;" do %>
+              <%= image_tag "lixeira.png", alt: "Apagar", style: "width: auto; height: auto;" %>
+            <% end %>
+          </div>
+
+          <h4 class="card-title">Nome: <strong><%= @department.name %></strong></h4>
+
+          <p class="card-text"><strong>Descrição:</strong> <%= @department.description %></p>
+          <p class="card-text"><strong>Código:</strong> <%= @department.code %></p>
+
+          <p class="card-text"><strong>Status:</strong>
+            <% if @department.status == 'active' %>
+              <%= "Ativo" %>
+            <% elsif @department.status == 'inactive' %>
+              <%= "Inativo" %>
+            <% end %>
+          </p>
+
+          <p class="card-text"><strong>Endereço:</strong> <%= @department.full_address %></p>
+
+          <%= link_to 'Voltar', departments_path, class: 'btn btn-warning mt-3' %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

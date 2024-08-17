@@ -1,0 +1,80 @@
+<div class="container mt-5">
+  <div class="row justify-content-center mt-5">
+    <div class="col-auto">
+      <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group me-5 md-5" role="group" aria-label="Dropdown com intervalo de salário">
+          
+        </div>
+        <div class="btn-group me-2" role="group" aria-label="Second group">
+          <button type="button" class="btn btn-primary custom-margin-left">
+            <%= link_to "Adicionar Departamento", new_department_path, class: "plain-link"%>
+          </button>
+        </div>
+        <div class="btn-group" role="group" aria-label="First group">
+          <button id="btnGroupDrop2" type="button" class="btn btn-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= image_tag "filtro.png" %>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="btnGroupDrop2">
+            <li><a class="dropdown-item" href="#">Inicial - Final</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .dropdown-toggle:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .dropdown-menu {
+    padding: 15px;
+    transition: none;
+  }
+
+  .dropdown-item {
+    pointer-events: auto;
+  }
+
+  .dropdown-item:hover, .dropdown-item:focus {
+    background-color: #f8f9fa;
+  }
+</style>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-7">
+      <table class="table mt-2">
+        <thead style="text-align: center; vertical-align: middle;">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Código</th>
+            <th scope="col">Status</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        
+        <tbody style="text-align: center; vertical-align: middle;">
+          <% @departments.each do |department| %>
+            <tr class="-3">
+              <th><%= department.id %></th>
+              <td><%= department.name %></td>
+              <td><%= department.code %></td>
+              <% if department.status == 'active' %>
+                <td><%= image_tag "ativo.png" %></td>
+              <% elsif department.status == 'inactive' %>
+                <td><%= image_tag "inativo.png" %></td>
+              <% end %>
+              <td><%= link_to (image_tag "ver.png"), department_path(department) %></td>
+              <td><%= link_to (image_tag "editar.png"), edit_department_path(department) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

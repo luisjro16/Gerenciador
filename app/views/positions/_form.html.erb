@@ -1,0 +1,57 @@
+<div class="container text-light p-4 rounded">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= form_with model: @position, local: true, class: 'row g-3 bg-secondary p-4 rounded' do |form| %>
+
+        <div class="col-md-5">
+          <%= form.label :name, 'Nome do Cargo', class: 'form-label' %>
+          <%= form.text_field :name, class: 'form-control bg-dark text-light border-light', id: 'validationDefault01', required: true %>
+        </div>
+
+        <div class="col-md-6">
+          <%= form.label :department, 'Departamento', class: 'form-label' %>
+          <%= form.select :department, [['Ativo', 'Ativo'], ['Inativo', 'Inativo'], ['Em licença', 'Em licença']], { prompt: 'Escolha...' }, { class: 'form-select bg-dark text-light border-light', id: 'validationDefault04', required: true } %>
+        </div>
+
+        <div class="col-md-6">
+          <%= form.label :description, 'Descrição do Cargo', class: 'form-label' %>
+          <%= form.text_area :description, class: 'form-control bg-dark text-light border-light', rows: 3, id: 'validationDefault02', required: true %>
+        </div>
+
+        <div class="col-md-5">
+          <%= form.label :base_salary, 'Salário Base', class: 'form-label' %>
+          <%= form.number_field :base_salary, class: 'form-control bg-dark text-light border-light', id: 'validationDefault03', required: true, step: '0.01', min: '0' %>
+        </div>
+
+        <div class="col-md-6">
+          <%= form.label :level, 'Nível do Cargo', class: 'form-label' %>
+          <%= form.select :level, [['Júnior', 'Júnior'], ['Pleno', 'Pleno'], ['Sênior', 'Sênior'], ['Não se aplica', 'Não se aplica']], { prompt: 'Escolha...' }, { class: 'form-select bg-dark text-light border-light', id: 'validationDefault04', required: true } %>
+        </div>
+
+        <div class="col-md-4">
+          <%= form.label :status, 'Status', class: 'form-label' %>
+          <%= form.select :status, 
+              [['Ativo', 'active'], ['Inativo', 'inactive']], 
+              { prompt: @position.status.present? ? @position.status.capitalize : 'Escolha...' },
+              { class: 'form-select bg-dark text-light border-light', id: 'validationDefault04', required: true } %>
+        </div>
+
+        <div class="col-md-6">
+          <%= form.label :requirements, 'Requerimentos', class: 'form-label' %>
+          <%= form.text_area :requirements, class: 'form-control bg-dark text-light border-light', rows: 3, id: 'validationDefault02', required: true %>
+        </div>   
+
+        <div class="col-md-6">
+          <%= form.label :benefits, 'Benefícios', class: 'form-label' %>
+          <%= form.text_area :benefits, class: 'form-control bg-dark text-light border-light', rows: 3, id: 'validationDefault02', required: true %>
+        </div>            
+
+        <div class="col-12 text-center">
+          <%= form.submit 'Enviar', class: 'btn btn-primary' %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
+

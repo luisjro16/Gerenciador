@@ -1,0 +1,16 @@
+body{
+    background-color: rgb(255, 255, 255);
+}
+
+.plain-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.adress-component{
+    margin-top: 2px;
+}
+
+.custom-margin-left {
+    margin-left: 250px; /* Ajuste o valor conforme necessário */
+}
