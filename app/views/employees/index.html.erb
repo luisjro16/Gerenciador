@@ -14,7 +14,7 @@
 
         <div class="btn-group me-2 custom-margin-left" role="group" aria-label="Second group">
             <button type="button" class="btn btn-primary">
-                <%= link_to "Adicionar Funcionário", new_user_path, class: "plain-link"%>
+                <%= link_to "Adicionar Funcionário", new_employee_path, class: "plain-link"%>
             </button>
         </div>
 
@@ -47,21 +47,21 @@
                     </tr>
                 </thead>
                 <tbody style="text-align: center; vertical-align: middle;">
-                    <% @users.each do |user| %>
+                    <% @employees.each do |employee| %>
                     <tr class="-3">
-                        <th><%= user.id %></th>
-                        <td><%= user.full_name %></td>
-                        <td><%= user.position %></td>
-                        <td><%= user.phone %></td>
-                        <% if user.status == 'active' %>
+                        <th><%= employee.id %></th>
+                        <td><%= employee.full_name %></td>
+                        <td><%= employee.position %></td>
+                        <td><%= employee.phone %></td>
+                        <% if employee.status == 'active' %>
                             <td><%= image_tag "ativo.png" %></td>
-                        <% elsif user.status == 'inactive' %>
+                        <% elsif employee.status == 'inactive' %>
                             <td><%= image_tag "inativo.png" %></td>
                         <% else %>
                             <td><%= image_tag "licenca.png" %></td>
                         <% end %>
-                        <td><%= link_to (image_tag "ver.png"), user_path(user) %></td>
-                        <td><%= link_to (image_tag "editar.png"), edit_user_path(user) %></td>
+                        <td><%= link_to (image_tag "ver.png"), employee_path(employee) %></td>
+                        <td><%= link_to (image_tag "editar.png"), edit_employee_path(employee) %></td>
                     </tr>
                     <% end %>
                 </tbody>

@@ -1,4 +1,4 @@
-class User < ApplicationRecord
+class Employee < ApplicationRecord
   has_one_attached :photo
 
   # Enum para o campo gender

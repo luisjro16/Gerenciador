@@ -1,7 +1,7 @@
 <div class="container text-light p-4 rounded">
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <%= form_with model: @user, local: true, class: 'row g-3 bg-secondary p-4 rounded' do |form| %>
+      <%= form_with model: @employee, local: true, class: 'row g-3 bg-secondary p-4 rounded' do |form| %>
 
         <div class="col-md-8">
           <%= form.label :full_name, 'Nome Completo', class: 'form-label' %>
@@ -48,8 +48,8 @@
                 ['Pernambuco (PE)', 'PE'], ['Piauí (PI)', 'PI'], ['Rio de Janeiro (RJ)', 'RJ'], ['Rio Grande do Norte (RN)', 'RN'],
                 ['Rio Grande do Sul (RS)', 'RS'], ['Rondônia (RO)', 'RO'], ['Roraima (RR)', 'RR'], ['Santa Catarina (SC)', 'SC'],
                 ['São Paulo (SP)', 'SP'], ['Sergipe (SE)', 'SE'], ['Tocantins (TO)', 'TO']
-              ], @user.country), 
-              { prompt: @user.country.present? ? @user.country : 'Escolha...' },
+              ], @employee.country), 
+              { prompt: @employee.country.present? ? @employee.country : 'Escolha...' },
               { class: 'form-select bg-dark text-light border-light', id: 'uf', required: true } %>
         </div>
 
@@ -115,7 +115,7 @@
           <%= form.label :status, 'Status', class: 'form-label' %>
           <%= form.select :status, 
               [['Ativo', 'active'], ['Inativo', 'inactive'], ['Em licença', 'on_leave']], 
-              { prompt: @user.status.present? ? @user.status.capitalize : 'Escolha...' },
+              { prompt: @employee.status.present? ? @employee.status.capitalize : 'Escolha...' },
               { class: 'form-select bg-dark text-light border-light', id: 'validationDefault04', required: true } %>
         </div>
 
