@@ -10,42 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_18_005631) do
-  create_table "Employees", force: :cascade do |t|
-    t.string "full_name"
-    t.date "birth_date"
-    t.string "gender"
-    t.string "cpf"
-    t.string "rg"
-    t.text "adress"
-    t.string "phone"
-    t.string "email"
-    t.string "position"
-    t.date "hire_date"
-    t.decimal "salary"
-    t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "cep"
-    t.string "country"
-    t.string "city"
-    t.string "district"
-    t.integer "number"
-    t.string "complement"
-    t.boolean "terms"
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
+ActiveRecord::Schema[7.2].define(version: 2024_08_18_021628) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -90,6 +55,30 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_18_005631) do
     t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "full_name"
+    t.date "birth_date"
+    t.string "gender"
+    t.string "cpf"
+    t.string "rg"
+    t.text "adress"
+    t.string "phone"
+    t.string "email"
+    t.string "position"
+    t.date "hire_date"
+    t.decimal "salary"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "cep"
+    t.string "country"
+    t.string "city"
+    t.string "district"
+    t.integer "number"
+    t.string "complement"
+    t.boolean "terms"
   end
 
   create_table "positions", force: :cascade do |t|
