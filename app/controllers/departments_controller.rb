@@ -4,7 +4,7 @@ class DepartmentsController < ApplicationController
 
   # GET /departments or /departments.json
   def index
-    @departments = Department.all
+    @departments = current_user.departments
   end
 
   # GET /departments/1 or /departments/1.json

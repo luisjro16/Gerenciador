@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_18_024835) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_18_204641) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -57,6 +57,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_18_024835) do
     t.float "longitude"
   end
 
+  create_table "departments_users", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "department_id", null: false
+    t.index ["department_id", "user_id"], name: "index_departments_users_on_department_id_and_user_id"
+    t.index ["user_id", "department_id"], name: "index_departments_users_on_user_id_and_department_id"
+  end
+
   create_table "employees", force: :cascade do |t|
     t.string "full_name"
     t.date "birth_date"
@@ -79,6 +86,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_18_024835) do
     t.integer "number"
     t.string "complement"
     t.boolean "terms"
+    t.integer "department_id"
   end
 
   create_table "positions", force: :cascade do |t|
@@ -92,6 +100,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_18_024835) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "department_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -106,6 +115,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_18_024835) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "access_level"
+    t.integer "department_ids"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

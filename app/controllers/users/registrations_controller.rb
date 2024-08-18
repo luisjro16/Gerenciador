@@ -10,9 +10,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    if User.count.zero?
+      params[:user][:access_level] = 'admin'
+    end
+    
+    super
+   end
 
   # GET /resource/edit
   # def edit

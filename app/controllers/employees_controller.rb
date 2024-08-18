@@ -3,7 +3,11 @@ class EmployeesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @employees = Employee.all
+    if current_user.access_level == 'admin'
+      @employees = Employee.all
+    else
+      @employees = Employee.where(department_id: current_user.departments.pluck(:id))
+    end
   end
 
   def show
@@ -46,7 +50,7 @@ class EmployeesController < ApplicationController
   private
 
     def set_employee
-      @employee = employee.find(params[:id])
+      @employee = Employee.find(params[:id])
     end
 
     def employee_params

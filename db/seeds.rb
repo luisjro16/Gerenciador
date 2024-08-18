@@ -1,141 +1,20 @@
-# db/seeds.rb
+# Primeiro, vamos garantir que os departamentos estão carregados
+departments = Department.all
 
-# Obtém os nomes únicos dos departamentos a partir dos cargos
-departments = Position.pluck(:department).uniq
-
-departments_data = [
-  {
-    name: departments[0],
-    description: "Departamento responsável pela gestão de vendas.",
-    code: "VND-001",
-    street: "Rua das Vendas",
-    number: "100",
-    complement: "Sala 1",
-    district: "Centro",
-    city: "São Paulo",
-    state: "SP",
-    cep: "01000-000",
-    status: "active"
-  },
-  {
-    name: departments[1],
-    description: "Departamento responsável pelo desenvolvimento de software.",
-    code: "DEV-002",
-    street: "Avenida do Desenvolvimento",
-    number: "200",
-    complement: "Bloco A",
-    district: "Tecnologia",
-    city: "Rio de Janeiro",
-    state: "RJ",
-    cep: "20000-000",
-    status: "active"
-  },
-  {
-    name: departments[2],
-    description: "Departamento de suporte ao cliente.",
-    code: "SUP-003",
-    street: "Rua do Suporte",
-    number: "300",
-    complement: "Andar 3",
-    district: "Centro",
-    city: "Belo Horizonte",
-    state: "MG",
-    cep: "30000-000",
-    status: "active"
-  },
-  {
-    name: departments[3],
-    description: "Departamento de marketing e publicidade.",
-    code: "MKT-004",
-    street: "Avenida do Marketing",
-    number: "400",
-    complement: "Sala 4",
-    district: "Marketing",
-    city: "Curitiba",
-    state: "PR",
-    cep: "40000-000",
-    status: "active"
-  },
-  {
-    name: departments[4],
-    description: "Departamento financeiro.",
-    code: "FIN-005",
-    street: "Rua Financeira",
-    number: "500",
-    complement: "Prédio 5",
-    district: "Financeiro",
-    city: "Porto Alegre",
-    state: "RS",
-    cep: "50000-000",
-    status: "active"
-  },
-  {
-    name: departments[5],
-    description: "Departamento de recursos humanos.",
-    code: "RH-006",
-    street: "Rua dos Recursos Humanos",
-    number: "600",
-    complement: "Casa 6",
-    district: "Recursos Humanos",
-    city: "Brasília",
-    state: "DF",
-    cep: "60000-000",
-    status: "active"
-  },
-  {
-    name: departments[6],
-    description: "Departamento de TI.",
-    code: "TI-007",
-    street: "Avenida da Tecnologia",
-    number: "700",
-    complement: "Loja 7",
-    district: "TI",
-    city: "Salvador",
-    state: "BA",
-    cep: "70000-000",
-    status: "active"
-  },
-  {
-    name: departments[7],
-    description: "Departamento de operações.",
-    code: "OPS-008",
-    street: "Rua das Operações",
-    number: "800",
-    complement: "Sala 8",
-    district: "Operações",
-    city: "Recife",
-    state: "PE",
-    cep: "80000-000",
-    status: "active"
-  },
-  {
-    name: departments[8],
-    description: "Departamento de logística.",
-    code: "LOG-009",
-    street: "Avenida da Logística",
-    number: "900",
-    complement: "Depósito 9",
-    district: "Logística",
-    city: "Belém",
-    state: "PA",
-    cep: "90000-000",
-    status: "active"
-  },
-  {
-    name: departments[9],
-    description: "Departamento jurídico.",
-    code: "JUR-010",
-    street: "Rua Jurídica",
-    number: "1000",
-    complement: "Sala 10",
-    district: "Jurídico",
-    city: "São Paulo",
-    state: "SP",
-    cep: "10000-001",
-    status: "active"
-  }
+# Criar algumas posições com diferentes departamentos
+positions = [
+  { name: "Analista de RH", description: "Responsável por todas as funções de recursos humanos", department_id: departments.find_by(name: "Recursos Humanos").id, level: "Júnior", base_salary: 3500, requirements: "Experiência com recrutamento e seleção", benefits: "Vale alimentação, plano de saúde", status: "active" },
+  { name: "Contador", description: "Gerencia as finanças e a contabilidade da empresa", department_id: departments.find_by(name: "Financeiro").id, level: "Pleno", base_salary: 4000, requirements: "Experiência em contabilidade", benefits: "Vale transporte, seguro de vida", status: "active" },
+  { name: "Desenvolvedora", description: "Desenvolve e mantém sistemas e aplicações", department_id: departments.find_by(name: "Tecnologia da Informação").id, level: "Pleno", base_salary: 4500, requirements: "Experiência com desenvolvimento de software", benefits: "Plano de saúde, vale refeição", status: "active" },
+  { name: "Analista de Marketing", description: "Desenvolve e implementa estratégias de marketing", department_id: departments.find_by(name: "Marketing").id, level: "Júnior", base_salary: 3700, requirements: "Experiência com marketing digital", benefits: "Plano de saúde, vale alimentação", status: "active" },
+  { name: "Vendedora", description: "Responsável pelas vendas e atendimento ao cliente", department_id: departments.find_by(name: "Vendas").id, level: "Júnior", base_salary: 3200, requirements: "Experiência em vendas", benefits: "Comissão sobre vendas, vale transporte", status: "active" },
+  { name: "Técnico de Suporte", description: "Oferece suporte técnico para usuários e sistemas", department_id: departments.find_by(name: "Suporte ao Cliente").id, level: "Pleno", base_salary: 3600, requirements: "Experiência em suporte técnico", benefits: "Vale refeição, plano de saúde", status: "active" },
+  { name: "Advogada", description: "Fornece consultoria e assessoria jurídica", department_id: departments.find_by(name: "Jurídico").id, level: "Sênior", base_salary: 5000, requirements: "Experiência em direito corporativo", benefits: "Plano de saúde, vale alimentação", status: "active" },
+  { name: "Logístico", description: "Coordena as operações de logística e transporte", department_id: departments.find_by(name: "Logística").id, level: "Pleno", base_salary: 3400, requirements: "Experiência em logística", benefits: "Vale transporte, seguro de vida", status: "active" },
+  { name: "Pesquisadora", description: "Conduz pesquisas e desenvolve novos produtos", department_id: departments.find_by(name: "Pesquisa e Desenvolvimento").id, level: "Pleno", base_salary: 4600, requirements: "Experiência em pesquisa e desenvolvimento", benefits: "Plano de saúde, vale refeição", status: "active" },
+  { name: "Comprador", description: "Gerencia o processo de compras e suprimentos", department_id: departments.find_by(name: "Compras").id, level: "Júnior", base_salary: 3300, requirements: "Experiência em compras", benefits: "Vale alimentação, vale transporte", status: "active" }
 ]
 
-departments_data.each do |department|
-  Department.create!(department)
+positions.each do |position_data|
+  Position.create(position_data)
 end
