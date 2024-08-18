@@ -1,13 +1,8 @@
 class EmployeesController < ApplicationController
   before_action :set_employee, only: [:edit, :update, :show, :destroy]
-  before_action :authenticate_user!
 
   def index
-    if current_user.access_level == 'admin'
-      @employees = Employee.all
-    else
-      @employees = Employee.where(department_id: current_user.departments.pluck(:id))
-    end
+    @employees = Employee.all
   end
 
   def show
@@ -50,7 +45,7 @@ class EmployeesController < ApplicationController
   private
 
     def set_employee
-      @employee = Employee.find(params[:id])
+      @employee = employee.find(params[:id])
     end
 
     def employee_params

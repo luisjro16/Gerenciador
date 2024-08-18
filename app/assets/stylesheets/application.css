@@ -14,3 +14,8 @@ body{
 .custom-margin-left {
     margin-left: 250px; /* Ajuste o valor conforme necessário */
 }
+
+.custom-card {
+    max-width: 600px; /* Ajuste o valor conforme necessário */
+    margin: 0 auto; /* Centraliza o cartão horizontalmente */
+  }

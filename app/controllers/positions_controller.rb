@@ -1,8 +1,13 @@
 class PositionsController < ApplicationController
   before_action :set_position, only: [ :show, :update, :edit, :destroy]
+  before_action :authenticate_user!
 
   def index
-    @positions = Position.all
+    if current_user.access_level == 'admin'
+      @positions = Position.all
+    else
+      @positions = Position.where(department_id: current_user.departments.pluck(:id))
+    end
   end
 
   def show

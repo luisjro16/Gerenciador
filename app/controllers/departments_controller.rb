@@ -1,9 +1,10 @@
 class DepartmentsController < ApplicationController
   before_action :set_department, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /departments or /departments.json
   def index
-    @departments = Department.all
+    @departments = current_user.departments
   end
 
   # GET /departments/1 or /departments/1.json

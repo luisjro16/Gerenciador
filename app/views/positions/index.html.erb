@@ -82,7 +82,7 @@
             <tr class="-3">
               <th><%= position.id %></th>
               <td><%= position.name %></td>
-              <td><%= position.department %></td>
+              <td><%= position.department.name %></td>
               <td><%= number_to_currency(position.base_salary, unit: "R$", separator: ",", delimiter: ".", precision: 2) %></td>
               <% if position.status == 'active' %>
                 <td><%= image_tag "ativo.png" %></td>

@@ -1,4 +1,8 @@
 class Department < ApplicationRecord
+  has_many :departments_users
+  has_many :users, through: :departments_users
+  has_many :employees
+  has_many :positions
 
   def full_address
     address_string = "#{street}, #{number}, #{city}, #{district}, #{state}"
