@@ -46,6 +46,11 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="<%= user_path(current_user) %>">Perfil</a></li>
+                  <% if current_user.access_level == 'admin'%>
+                    <li>
+                      <%= link_to 'Criar uma conta', new_user_path, class: 'dropdown-item' %>
+                    </li>
+                  <% end %>
                   <li>
                     <%= button_to 'Sair', destroy_user_session_path, method: :delete, data: { confirm: 'Tem certeza que deseja sair?' }, class: 'dropdown-item text-danger' %>
                   </li>
