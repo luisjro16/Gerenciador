@@ -6,6 +6,18 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    
+    if @user.update(user_params)
+      redirect_to root_path, notice: 'Usuário editado'
+    else
+      puts "Update failed with errors: #{@user.errors.full_messages}"
+      render :edit
+    end
   end
 
   def new
