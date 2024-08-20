@@ -32,7 +32,7 @@ class Users::SessionsController < Devise::SessionsController
     Rails.logger.debug "Verificando se há usuários no banco de dados..."
     if User.count.zero?
       Rails.logger.debug "Nenhum usuário encontrado. Redirecionando para a criação de conta."
-      redirect_to new_user_registration_path
+      redirect_to new_user_path
     else
       Rails.logger.debug "Usuários encontrados. Procedendo para a tela de login."
     end
