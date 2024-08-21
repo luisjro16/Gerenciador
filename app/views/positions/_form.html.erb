@@ -9,8 +9,8 @@
         </div>
 
         <div class="col-md-6">
-          <%= form.label :department, 'Departamento', class: 'form-label' %>
-          <%= form.select :department, [['Ativo', 'Ativo'], ['Inativo', 'Inativo'], ['Em licença', 'Em licença']], { prompt: 'Escolha...' }, { class: 'form-select bg-dark text-light border-light', id: 'validationDefault04', required: true } %>
+          <%= form.label :department_id, 'Departamento', class: 'form-label' %>
+          <%= form.collection_select :department_id, Department.where(status: 'Ativo'), :id, :name, { prompt: 'Escolha...' }, { class: 'form-select bg-dark text-light border-light', id: 'validationDefault04', required: true } %>
         </div>
 
         <div class="col-md-6">

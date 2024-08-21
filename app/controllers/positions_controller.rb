@@ -3,11 +3,37 @@ class PositionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    q_params = params[:q].present? ? params[:q].permit! : {}
+    @q = Position.ransack(q_params)
+  
+    # Inicializa @positions com a busca do Ransack
     if current_user.access_level == 'admin'
-      @positions = Position.all
+      @positions = @q.result(distinct: true)
     else
-      @positions = Position.where(department_id: current_user.departments.pluck(:id))
+      @positions = @q.result(distinct: true).where(department_id: current_user.departments.pluck(:id))
     end
+  
+    # Aplica o filtro de departamento, se presente
+    if params[:department_id].present?
+      @positions = @positions.where(department_id: params[:department_id])
+    end
+  
+    # Aplica o filtro de salário
+    min_salary = params[:min_salary].present? ? params[:min_salary].to_f : nil
+    max_salary = params[:max_salary].present? ? params[:max_salary].to_f : nil
+  
+    if min_salary || max_salary
+      if min_salary && max_salary
+        @positions = @positions.where(base_salary: min_salary..max_salary)
+      elsif min_salary
+        @positions = @positions.where("base_salary >= ?", min_salary)
+      elsif max_salary
+        @positions = @positions.where("base_salary <= ?", max_salary)
+      end
+    end
+  
+    # Ordenação
+    @positions = @positions.order(base_salary: params[:sort_order]) if params[:sort_order].present?
   end
 
   def show
@@ -53,6 +79,6 @@ class PositionsController < ApplicationController
   end
 
   def position_params
-    params.require(:position).permit(:name, :description, :department, :level, :base_salary, :requirements, :benefits, :status)
+    params.require(:position).permit(:name, :description, :level, :base_salary, :requirements, :benefits, :status, :department_id)
   end
 end

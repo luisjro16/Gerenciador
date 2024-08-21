@@ -106,9 +106,14 @@
           <%= form.date_field :hire_date, class: 'form-control dark-input', id: 'validationDefaultDate', required: true %>
         </div>
 
-        <div class="col-md-4">
-          <%= form.label :position, 'Cargo', class: 'form-label' %>
-          <%= form.select :position, [['Algo', 'Algo'], ['Algo 2', 'Algo 2'], ['Outro', 'Outro']], { prompt: 'Escolha...' }, { class: 'form-select bg-dark text-light border-light', id: 'validationDefault04', required: true } %>
+        <div class="col-md-6">
+          <%= form.label :department_id, 'Departamento', class: 'form-label' %>
+          <%= form.collection_select :department_id, Department.where(status: 'Ativo'), :id, :name, { prompt: 'Escolha...' }, { class: 'form-select bg-dark text-light border-light', id: 'validationDefault04', required: true } %>
+        </div>
+
+        <div class="col-md-6">
+          <%= form.label :position_id, 'Cargo', class: 'form-label' %>
+          <%= form.collection_select :position_id, Position.where(status: 'Ativo'), :id, :name, { prompt: 'Escolha...' }, { class: 'form-select bg-dark text-light border-light', id: 'validationDefault04', required: true } %>
         </div>
 
         <div class="col-md-4">

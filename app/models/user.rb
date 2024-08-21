@@ -11,6 +11,9 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :access_level, inclusion: { in: %w(admin hr_manager) }
   
+  validates :name, presence: true
+  validates :email, presence: true, uniqueness: true
+  validates :password, presence: true, length: { minimum: 6 }, if: :password_required?
 
   private
 
@@ -26,5 +29,9 @@ class User < ApplicationRecord
       self.departments = departments
       Rails.logger.info "Assigned departments: #{departments.pluck(:name).join(', ')} to user #{self.name}"
     end
+  end
+
+  def password_required?
+    password.present? || password_confirmation.present?
   end
 end

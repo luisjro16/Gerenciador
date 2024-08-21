@@ -37,6 +37,11 @@
               <a class="nav-link" aria-current="page" href="/employees">Funcionários</a>
               <a class="nav-link" href="/positions">Cargos</a>
               <a class="nav-link" href="/departments">Departamentos</a>
+              <% if current_user.access_level == 'admin'%>
+                  <a class="nav-link" href="/admin_users">
+                    Usuários
+                  </a>
+              <% end %>
             </div>
             <div class="navbar-nav ms-auto">
               <div class="nav-item dropdown">

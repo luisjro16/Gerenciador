@@ -14,8 +14,18 @@
           <h4 class="card-title">Nome: <strong><%= @position.name %></strong></h4>
 
           <p class="card-text"><strong>Descrição:</strong> <%= @position.description %></p>
-          <p class="card-text"><strong>Departamento:</strong> <%= @position.department %></p>
-          <p class="card-text"><strong>Nível:</strong> <%= @position.level %></p>
+          <p class="card-text"><strong>Departamento:</strong> <%= Department.find_by(id: @position.department_id).name %></p>
+          <p class="card-text"><strong>Nível:</strong> 
+            <% if @position.level == 'junior' %>
+              <%= "Júnior" %>
+            <% elsif @position.level == 'pleno' %>
+              <%= "Pleno" %>
+            <% elsif @position.level == 'senior' %>
+              <%= "Sênior" %>
+            <% else %>
+              <%= "Não se aplica" %>
+            <% end %>
+          </p>
 
           <p class="card-text"><strong>Status:</strong>
             <% if @position.status == 'active' %>

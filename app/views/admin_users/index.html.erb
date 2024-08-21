@@ -7,9 +7,10 @@
         </div>
         <div class="btn-group me-2" role="group" aria-label="Second group">
           <button type="button" class="btn btn-primary custom-margin-left">
-            <%= link_to "Adicionar Departamento", new_department_path, class: "plain-link"%>
+            <%= link_to "Adicionar Usuário", new_user_path, class: "plain-link"%>
           </button>
         </div>
+
       </div>
     </div>
   </div>
@@ -43,26 +44,20 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Nome</th>
-            <th scope="col">Código</th>
-            <th scope="col">Status</th>
+            <th scope="col">Email</th>
             <th scope="col"></th>
             <th scope="col"></th>
           </tr>
         </thead>
         
         <tbody style="text-align: center; vertical-align: middle;">
-          <% @departments.each do |department| %>
+          <% @users.each do |user| %>
             <tr class="-3">
-              <th><%= department.id %></th>
-              <td><%= department.name %></td>
-              <td><%= department.code %></td>
-              <% if department.status == 'active' %>
-                <td><%= image_tag "ativo.png" %></td>
-              <% elsif department.status == 'inactive' %>
-                <td><%= image_tag "inativo.png" %></td>
-              <% end %>
-              <td><%= link_to (image_tag "ver.png"), department_path(department) %></td>
-              <td><%= link_to (image_tag "editar.png"), edit_department_path(department) %></td>
+              <td><%= user.id %></td>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td><%= link_to (image_tag "ver.png"), admin_user_path(user) %></td>
+              <td><%= link_to (image_tag "editar.png"), edit_admin_user_path(user) %></td>
             </tr>
           <% end %>
         </tbody>

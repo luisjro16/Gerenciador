@@ -7,8 +7,12 @@
                 Data de Contratação
             </button>
         <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <li><a class="dropdown-item" href="#">Inicial - Final</a></li>
-            <li><a class="dropdown-item" href="#">Final Inicial</a></li>
+            <li>
+                <%= link_to 'Inicial - Final', employees_path(sort_order: 'asc', department_id: params[:department_id], q: params[:q] || {}), class: 'dropdown-item' %>
+            </li>
+            <li>
+                <%= link_to 'Final - Inicial', employees_path(sort_order: 'desc', department_id: params[:department_id], q: params[:q] || {}), class: 'dropdown-item' %>
+            </li>
         </ul>
         </div>
 
@@ -23,7 +27,14 @@
                 <%= image_tag "filtro.png" %>
             </button>
             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                <li><a class="dropdown-item" href="#">Inicial - Final</a></li>
+                <li>
+                    <%= link_to 'Todos', employees_path(sort_order: params[:sort_order], department_id: nil, q: params[:q]), class: 'dropdown-item' %>
+                </li>
+                <% current_user.departments.each do |department| %>
+                    <li>
+                        <%= link_to department.name, employees_path(sort_order: params[:sort_order], department_id: department.id, q: params[:q]), class: 'dropdown-item' %>
+                    </li>
+                <% end %>
             </ul>
         </div>
 
@@ -51,7 +62,7 @@
                     <tr class="-3">
                         <th><%= employee.id %></th>
                         <td><%= employee.full_name %></td>
-                        <td><%= employee.position %></td>
+                        <td><%= Position.find_by(id: employee.position_id).name %></td>
                         <td><%= employee.phone %></td>
                         <% if employee.status == 'active' %>
                             <td><%= image_tag "ativo.png" %></td>

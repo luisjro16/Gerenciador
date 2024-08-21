@@ -23,7 +23,8 @@
 
           <h4 class="card-title">Nome Completo: <strong><%= @employee.full_name %></strong></h4>
           
-          <p class="card-text"><strong>Cargo:</strong> <%= @employee.position %></p>
+          <p class="card-text"><strong>Cargo:</strong> <%= Position.find_by(id: @employee.position_id).name %></p>
+          <p class="card-text"><strong>Data de Contratação:</strong> <%= @employee.formatted_hire_date %></p>
           <p class="card-text"><strong>Telefone:</strong> <%= @employee.formatted_phone %></p>
           <p class="card-text"><strong>E-mail:</strong> <%= @employee.email %></p>
           <p class="card-text"><strong>Status:</strong> 
