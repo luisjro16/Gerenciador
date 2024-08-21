@@ -31,7 +31,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'faker', '~> 2.20'
+gem 'faker', '~> 3.4'
 
 gem "devise", "~> 4.9"
 
