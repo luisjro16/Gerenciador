@@ -9,6 +9,14 @@ class Employee < ApplicationRecord
   # Enum para o campo status
   enum status: { active: 'Ativo', inactive: 'Inativo', on_leave: 'Em licença' }
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["adress", "birth_date", "cep", "city", "complement", "country", "cpf", "created_at", "department_id", "district", "email", "full_name", "gender", "hire_date", "id", "number", "phone", "position_id", "rg", "salary", "status", "updated_at"]
+  end
+
+  def formatted_hire_date
+    hire_date.strftime("%d/%m/%Y") if hire_date.present?
+  end
+
   def formatted_phone
     cleaned = phone.gsub(/\D/, '')
     
