@@ -1,5 +1,6 @@
 class Employee < ApplicationRecord
   belongs_to :department
+  belongs_to :position
   has_one_attached :photo
 
   # Enum para o campo gender

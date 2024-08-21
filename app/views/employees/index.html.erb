@@ -51,7 +51,7 @@
                     <tr class="-3">
                         <th><%= employee.id %></th>
                         <td><%= employee.full_name %></td>
-                        <td><%= employee.position %></td>
+                        <td><%= Position.find_by(id: employee.position_id).name %></td>
                         <td><%= employee.phone %></td>
                         <% if employee.status == 'active' %>
                             <td><%= image_tag "ativo.png" %></td>

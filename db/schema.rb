@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_20_185429) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_21_015542) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -53,8 +53,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_20_185429) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "latitude"
-    t.float "longitude"
   end
 
   create_table "departments_users", id: false, force: :cascade do |t|
@@ -73,7 +71,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_20_185429) do
     t.text "adress"
     t.string "phone"
     t.string "email"
-    t.string "position"
     t.date "hire_date"
     t.decimal "salary"
     t.string "status"
@@ -87,12 +84,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_20_185429) do
     t.string "complement"
     t.boolean "terms"
     t.integer "department_id"
+    t.integer "position_id"
+    t.index ["position_id"], name: "index_employees_on_position_id"
   end
 
   create_table "positions", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.string "department"
     t.string "level"
     t.decimal "base_salary"
     t.text "requirements"
@@ -126,4 +124,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_20_185429) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "employees", "positions"
 end

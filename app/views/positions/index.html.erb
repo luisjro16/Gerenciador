@@ -91,7 +91,17 @@
               <% end %>
 
               <td><%= link_to (image_tag "ver.png"), position_path(position) %></td>
-              <td><%= link_to (image_tag "editar.png"), edit_position_path(position) %></td>
+            
+              <% if Department.find_by(id: position.department_id).status == 'active'%>
+                <td>
+                  <%= link_to (image_tag "editar.png"), edit_position_path(position) %>
+                </td>
+              <% else %>
+                <td>
+                  <%= image_tag "editar.png", style: "opacity: 0.5;" %>
+                </td>
+              <% end %>
+              
             </tr>
           <% end %>
         </tbody>
