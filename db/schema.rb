@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_21_015542) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_21_012728) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -74,8 +74,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_21_015542) do
     t.date "hire_date"
     t.decimal "salary"
     t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "cep"
     t.string "country"
     t.string "city"
@@ -85,7 +83,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_21_015542) do
     t.boolean "terms"
     t.integer "department_id"
     t.integer "position_id"
-    t.index ["position_id"], name: "index_employees_on_position_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "positions", force: :cascade do |t|
@@ -96,9 +95,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_21_015542) do
     t.text "requirements"
     t.text "benefits"
     t.string "status"
+    t.integer "department_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "department_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -121,8 +120,4 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_21_015542) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "employees", "positions"
 end
